@@ -21,5 +21,6 @@ typedef struct	s_env
 }				t_env;
 
 char **parse_env(char **ep);
+void ft_prompt(char **env);
 
 #endif
