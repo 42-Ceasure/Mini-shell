@@ -3,12 +3,11 @@
 
 int main(int ac, char **av, char **ep)
 {
-	(void)ac;
-	(void)av;
-	char **env;
+	t_env *e;
 
-	env = parse_env(ep);
-	ft_prompt(env);
+	e = (t_env *)malloc(sizeof(t_env));
+	parse_env(e, ac, av, ep);
+	ft_prompt(e);
 
 	return (0);
 }

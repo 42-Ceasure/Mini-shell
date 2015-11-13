@@ -17,10 +17,12 @@
 
 typedef struct	s_env
 {
-
+	char	**env;
+	char	**av;
+	int		ac;
 }				t_env;
 
-char **parse_env(char **ep);
-void ft_prompt(char **env);
+void parse_env(t_env *e, int ac, char **av, char **ep);
+void ft_prompt(t_env *e);
 
 #endif
