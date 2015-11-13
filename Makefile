@@ -39,7 +39,8 @@ INC_LIBFT = ./inc/libft/inc/
 all:    $(NAME)
 
 $(NAME): $(addprefix $(OBJDIR),$(OBJ)) $(LIBFTEXE)
-		@$(CC) $(CFLAG) -L $(LIBFT) -lft $(addprefix $(OBJDIR), $(OBJ)) -o $(NAME)
+		@$(CC) $(CFLAG) -o $(NAME)\
+		$(addprefix $(OBJDIR), $(OBJ)) -L $(LIBFT) -lft
 
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
@@ -47,7 +48,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 		@$(CC) $(CFLAG) -I $(INC) -I  $(INC_LIBFT) -o $@ -c $<
 
 $(LIBFTEXE): $(LIBFT)
-		@make -C $(LIBFT)
+		@make -k -s -C $(LIBFT)
 
 clean:	
 		@rm -Rf  $(OBJ)
