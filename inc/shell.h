@@ -22,7 +22,7 @@ typedef struct	s_env
 	int		ac;
 }				t_env;
 
-void parse_env(t_env *e, int ac, char **av, char **ep);
-void ft_prompt(t_env *e);
+void parse_env(t_env *e, char **ep);
+void parse_cmd(t_env *e, int ac, char **av, char **ep, char *buf);
 
 #endif

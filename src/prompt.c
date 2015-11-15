@@ -1,23 +1,11 @@
 #include "shell.h"
 
-void ft_prompt(t_env *e)
+void parse_cmd(t_env *e, int ac, char **av, char **ep, char *buf)
 {
-	char 	*buf;
-	pid_t	father;
-
-	ft_putstr("#> ");
-	while (get_next_line(0, &buf) != 0)
-	{
-		father = fork();
-		if (father > 0)
-		{
-			waitpid(father, NULL, 0);
-			ft_putstr("#> ");
-		}
-		if (father == 0)
-		{
-			sleep(1);
-			execve(buf, e->av, NULL);
-		}
-	}
+	(void)av;
+	(void)ep;
+	(void)ac;
+	char *lol;
+	lol = ft_strtrim(buf);
+	e->av = ft_strsplit(lol, ' ');
 }
