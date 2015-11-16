@@ -27,9 +27,10 @@ typedef struct	s_env
 }				t_env;
 
 void parse_env(t_env *e, char **ep);
-void parse_cmd(t_env *e, int ac, char **av, char **ep, char *buf);
+void parse_cmd(t_env *e, char *buf);
 void print_env(t_env *e);
 void print_vars(t_env *e);
-
+void prompt(t_env *e);
+void travaux(t_env *e);
 
 #endif

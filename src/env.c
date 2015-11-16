@@ -7,17 +7,29 @@ void		print_env(t_env *e)
 		while (*e->env)
 			ft_putendl(*e->env++);
 	}
+	ft_putchar('\n');
 }
 
 void		print_vars(t_env *e)
 {
-	if (e)
-	{
+	char 	**path;
+
+	path = e->paths;
+	if (!ft_strcmp(e->av[1], "pwd"))
 		ft_putendl(*e->pwd);
+	else if (!ft_strcmp(e->av[1], "old_pwd"))
 		ft_putendl(*e->oldpwd);
+	else if (!ft_strcmp(e->av[1], "home"))
 		ft_putendl(*e->home);
-		ft_putendl(*e->paths);
+	else if (!ft_strcmp(e->av[1], "paths"))
+	{
+		while (*path)
+		{
+			ft_putendl(*path++);
+		}
 	}
+	ft_putchar('\n');
+	// ft_putendl(*e->paths);
 }
 
 void		parse_env(t_env *e, char **ep)
@@ -47,7 +59,9 @@ void		parse_env(t_env *e, char **ep)
 		else if (!ft_strncmp(e->env[i], "HOME=", 5))
 			*e->home = &e->env[i][5];
 		else if (!ft_strncmp(e->env[i], "PATH=", 5))
-			*e->paths = &e->env[i][5];
+		{
+			e->paths = ft_strsplit(&e->env[i][5], ':');
+		}
 		i++;
 	}
 }
