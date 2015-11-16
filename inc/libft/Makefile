@@ -10,7 +10,7 @@
 #                                                                              #
 #******************************************************************************#
 
-CC = clang-3.5
+CC = gcc
 
 CFLAG = -Wall -Werror -Wextra
 
@@ -18,6 +18,8 @@ NAME = libft.a
 
 SRC = ft_atoi.c\
 	ft_bzero.c\
+	ft_epur_str.c\
+	ft_epur_tabul.c\
 	ft_isalnum.c\
 	ft_isalpha.c\
 	ft_isascii.c\
