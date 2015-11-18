@@ -2,12 +2,19 @@
 
 void		print_env(t_env *e)
 {
+	int i;
+
+	i = 0;
 	if (e->env)
 	{
-		while (*e->env)
-			ft_putendl(*e->env++);
+		while (e->env[i])
+		{
+			ft_putendl(e->env[i]);
+			i++;
+		}
 	}
 	ft_putchar('\n');
+	prompt(e);
 }
 
 void		print_vars(t_env *e)
@@ -29,7 +36,7 @@ void		print_vars(t_env *e)
 		}
 	}
 	ft_putchar('\n');
-	// ft_putendl(*e->paths);
+	prompt(e);
 }
 
 void		parse_env(t_env *e, char **ep)

@@ -19,11 +19,12 @@ typedef struct	s_env
 {
 	char	**env;
 	char	**av;
-	int		ac;
 	char	**pwd;
 	char	**oldpwd;
 	char	**home;
 	char	**paths;
+	int		ac;
+	int		dad;
 }				t_env;
 
 void parse_env(t_env *e, char **ep);
@@ -32,5 +33,6 @@ void print_env(t_env *e);
 void print_vars(t_env *e);
 void prompt(t_env *e);
 void travaux(t_env *e);
+void inspection(t_env *e);
 
 #endif
