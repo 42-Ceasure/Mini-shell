@@ -4,7 +4,7 @@ void ft_cd(t_env *e)
 {
 	if (chdir(e->av[1]) != 0)
 	{
-		ft_putstr("csh : \"");
+		ft_putstr("c-sh : \"");
 		ft_putstr(e->av[1]);
 		ft_putendl("\" : exist only in your imagination");
 	}
@@ -16,7 +16,7 @@ void prompt(t_env *e)
 {
 	(void)e;
 	// ft_putstr(*e->pwd);
-	ft_putstr("csh# >> ");
+	ft_putstr("c-sh# >> ");
 }
 
 void travaux(t_env *e)
@@ -41,7 +41,7 @@ void travaux(t_env *e)
 					execve(ft_strjoin(e->paths[i], ft_strjoin("/", e->av[0])), e->av, NULL);
 			i++;
 		}
-		ft_putstr("csh : \'");
+		ft_putstr("c-sh : \'");
 		ft_putstr(e->av[0]);
 		ft_putendl("\' : command not found");
 		exit(0);
