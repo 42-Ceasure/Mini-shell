@@ -22,10 +22,10 @@ int main(int ac, char **av, char **ep)
 	t_env	*e;
 	char 	*buf;
 
-	(void)av;
+	// (void)av;
 	if (ac == 1)
 	{
-		// ft_swagg(av[0]);
+		ft_swagg(av[0]);
 		e = (t_env *)malloc(sizeof(t_env));
 		parse_env(e, ep);
 		prompt(e);
