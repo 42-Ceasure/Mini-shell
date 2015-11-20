@@ -25,7 +25,6 @@ typedef struct	s_env
 	char	**home;
 	char	**paths;
 	int		ac;
-	int		dad;
 }				t_env;
 
 void inspection(t_env *e);

@@ -38,7 +38,7 @@ void travaux(t_env *e)
 		{
 			if ((dir = opendir(ft_strjoin(e->paths[i], "/"))))
 				if (!access(ft_strjoin(e->paths[i], ft_strjoin("/", e->av[0])), X_OK))
-					execve(ft_strjoin(e->paths[i], ft_strjoin("/", e->av[0])), e->av, NULL);
+					execve(ft_strjoin(e->paths[i], ft_strjoin("/", e->av[0])), e->av, e->env);
 			i++;
 		}
 		ft_putstr("c-sh : \'");
