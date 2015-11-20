@@ -1,5 +1,4 @@
 
-
 #ifndef FT_SH1_H
 # define FT_SH1_H
 
@@ -15,6 +14,8 @@
 # include <sys/uio.h>
 # include "libft.h"
 
+// # define PATH_MAX 1024
+
 typedef struct	s_env
 {
 	char	**env;
@@ -27,12 +28,13 @@ typedef struct	s_env
 	int		dad;
 }				t_env;
 
+void inspection(t_env *e);
+void memreg(t_env *e, char *buf);
 void parse_env(t_env *e, char **ep);
 void parse_cmd(t_env *e, char *buf);
 void print_env(t_env *e);
 void print_vars(t_env *e);
 void prompt(t_env *e);
 void travaux(t_env *e);
-void inspection(t_env *e);
 
 #endif

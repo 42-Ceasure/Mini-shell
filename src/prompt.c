@@ -2,14 +2,22 @@
 
 void ft_cd(t_env *e)
 {
-	chdir(e->av[1]);
+	if (chdir(e->av[1]) != 0)
+	{
+		ft_putchar('\"');
+		ft_putstr(e->av[1]);
+		ft_putchar('\"');
+		ft_putendl(" exist only in your imagination");
+	}
+	// recalc_pwd(e);
 	prompt(e);
 }
 
 void prompt(t_env *e)
 {
 	(void)e;
-	ft_putstr("#> ");
+	// ft_putstr(*e->pwd);
+	ft_putstr("# >> ");
 }
 
 void travaux(t_env *e)
@@ -34,7 +42,8 @@ void travaux(t_env *e)
 					execve(ft_strjoin(e->paths[i], ft_strjoin("/", e->av[0])), e->av, NULL);
 			i++;
 		}
-		
+		ft_putendl("command not found");
+		exit(0);
 	}
 }
 
