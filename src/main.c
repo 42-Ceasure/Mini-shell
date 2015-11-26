@@ -5,16 +5,32 @@ void ft_swagg(char *s)
 {
 		ft_putstr("launching ");
 		ft_putendl(s);
-		sleep(1);
-		ft_putchar('\n');
-		sleep(1);
-		ft_putchar('\n');
-		sleep(1);
-		ft_putchar('\n');
-		sleep(1);
-		ft_putchar('\n');
-		sleep(1);
-		ft_putchar('\n');
+		usleep(500000);
+		ft_putendl(";-.               ,");
+		usleep(500000);
+		ft_putendl(" \\ '.           .'/");
+		usleep(500000);
+		ft_putendl("  \\  \\ .---. .-' /");
+		usleep(500000);
+		ft_putendl("   '. '     `\\_.'");
+		usleep(500000);
+		ft_putendl("     |(),()  |     ,");
+		usleep(500000);
+		ft_putendl("     (  __   /   .' \\");
+		usleep(500000);	
+		ft_putendl("    .''.___.'--,/\\_,|");
+		usleep(500000);
+		ft_putendl("   {  /     \\   }   |");
+		usleep(500000);
+		ft_putendl("   '.\\     /_.'    /");
+		usleep(500000);
+		ft_putendl("    |'-.-',  `; _.'");
+		usleep(500000);
+		ft_putendl("    |  |  |   |`");
+		usleep(500000);
+		ft_putendl("    `\"\"`\"\"`\"\"\"`");
+		usleep(500000);
+		ft_putchar('\n')
 }
 
 int main(int ac, char **av, char **ep)
@@ -22,7 +38,7 @@ int main(int ac, char **av, char **ep)
 	t_env	*e;
 	char 	*buf;
 
-	// (void)av;
+	(void)av;
 	if (ac == 1)
 	{
 		ft_swagg(av[0]);
