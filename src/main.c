@@ -22,15 +22,15 @@ void ft_swagg(char *s)
 		usleep(500000);
 		ft_putendl("   {  /     \\   }   |");
 		usleep(500000);
-		ft_putendl("   '.\\     /_.'    /");
+		ft_putendl("    '.\\     /_.'    /");
 		usleep(500000);
-		ft_putendl("    |'-.-',  `; _.'");
+		ft_putendl("     |'-.-',  `; _.'");
 		usleep(500000);
-		ft_putendl("    |  |  |   |`");
+		ft_putendl("     |  |  |   |`");
 		usleep(500000);
-		ft_putendl("    `\"\"`\"\"`\"\"\"`");
+		ft_putendl("     `\"\"`\"\"`\"\"\"`");
 		usleep(500000);
-		ft_putchar('\n')
+		ft_putchar('\n');
 }
 
 int main(int ac, char **av, char **ep)
