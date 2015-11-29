@@ -41,15 +41,15 @@ int main(int ac, char **av, char **ep)
 	(void)av;
 	if (ac == 1)
 	{
-		ft_swagg(av[0]);
-		e = (t_env *)malloc(sizeof(t_env));
+		// ft_swagg(av[0]);
+		e = (t_env *)ft_memalloc(sizeof(t_env));
 		parse_env(e, ep);
 		prompt(e);
 		while (get_next_line(0, &buf) != 0)
 		{
 			parse_cmd(e, buf);
 			inspection(e);
-			memreg(e, buf);
+			free(buf);
 		}
 	}
 	else

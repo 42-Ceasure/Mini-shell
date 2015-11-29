@@ -47,11 +47,11 @@ void		parse_env(t_env *e, char **ep)
 	i = 0;
 	while (ep[i] != NULL)
 		i++;
-	e->env = (char **)malloc(sizeof(char *) * i + 1);
-	e->pwd = (char **)malloc(sizeof(char *));
-	e->oldpwd = (char **)malloc(sizeof(char *));
-	e->home = (char **)malloc(sizeof(char *));
-	e->paths = (char **)malloc(sizeof(char *));
+	e->env = (char **)ft_memalloc(sizeof(char *) * i + 1);
+	e->pwd = (char **)ft_memalloc(sizeof(char *));
+	e->oldpwd = (char **)ft_memalloc(sizeof(char *));
+	e->home = (char **)ft_memalloc(sizeof(char *));
+	e->paths = NULL;
 	i = 0;
 	while (ep[i])
 	{

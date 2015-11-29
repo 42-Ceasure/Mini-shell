@@ -35,8 +35,7 @@ char		*ft_epur_str(const char *src)
 
 	a = 0;
 	count = -1;
-	ret = (char *)malloc(sizeof(char) * (ft_strlen(src) - things(src) + 1));
-	ft_bzero(ret, ft_strlen(src) - things(src) + 1);
+	ret = (char *)ft_memalloc(sizeof(char) * (ft_strlen(src) - things(src) + 1));
 	while (*(src + ++count + a) != '\0')
 	{
 		while (*(src + count + a) == ' ' || *(src + count + a) == '\t')

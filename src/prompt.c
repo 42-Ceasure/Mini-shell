@@ -67,10 +67,10 @@ void travaux(t_env *e)
 			}
 			i++;
 		}
-		closedir(dir);
 		ft_putstr("c-sh : \'");
 		ft_putstr(e->av[0]);
 		ft_putendl("\' : command not found");
+		closedir(dir);
 		exit(0);
 	}
 }
@@ -97,8 +97,11 @@ void inspection(t_env *e)
 
 void parse_cmd(t_env *e, char *buf)
 {
-	char *lol;
+	int i;
 
-	lol = ft_epur_tabul(buf);
-	e->av = ft_strsplit(lol, ' ');
+	i = 0;
+	ft_strdel(e->av);
+	free(e->av);
+	e->av = NULL;
+	e->av = ft_strsplit(buf, ' ');
 }

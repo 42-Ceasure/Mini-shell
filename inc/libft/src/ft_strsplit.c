@@ -66,7 +66,7 @@ char				**ft_strsplit(const char *s, char c)
 	if (!s)
 		return (NULL);
 	nbl = ft_count(s, c);
-	if (!(tab = (char **)malloc(sizeof(char *) * (nbl + 1))))
+	if (!(tab = (char **)ft_memalloc(sizeof(char *) * (nbl + 1))))
 		return (NULL);
 	tab = ft_sublen(s, c, tab, nbl);
 	return (tab);

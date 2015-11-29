@@ -17,10 +17,11 @@ void	ft_putendl_fd(char *s, int fd)
 	int i;
 
 	i = 0;
-	while (s[i])
+	if (s)
 	{
-		ft_putchar_fd(s[i], fd);
-		i++;
+		while (s[i])
+			i++;
+		write(fd, s, i);
+		ft_putchar('\n');
 	}
-	ft_putchar_fd('\n', fd);
 }
