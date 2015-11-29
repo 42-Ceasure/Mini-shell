@@ -38,7 +38,7 @@ void prompt(t_env *e)
 {
 	(void)e;
 	// ft_putstr(*e->pwd);
-	ft_putstr("c-sh# >> ");
+	ft_putstr("c-sh #>> ");
 }
 
 void travaux(t_env *e)
@@ -64,13 +64,13 @@ void travaux(t_env *e)
 					execve(e->av[0], e->av, e->env);
 				if (!access(ft_strjoin(e->paths[i], ft_strjoin("/", e->av[0])), X_OK))
 					execve(ft_strjoin(e->paths[i], ft_strjoin("/", e->av[0])), e->av, e->env);
+				closedir(dir);
 			}
 			i++;
 		}
 		ft_putstr("c-sh : \'");
 		ft_putstr(e->av[0]);
 		ft_putendl("\' : command not found");
-		closedir(dir);
 		exit(0);
 	}
 }
