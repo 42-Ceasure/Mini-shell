@@ -14,7 +14,7 @@
 # include <sys/uio.h>
 # include "libft.h"
 
-// # define PATH_MAX 1024
+# define PATH_MAX 1024
 
 typedef struct	s_env
 {
@@ -24,6 +24,7 @@ typedef struct	s_env
 	char	**oldpwd;
 	char	**home;
 	char	**paths;
+	size_t	i;
 	int		ac;
 }				t_env;
 
@@ -35,5 +36,8 @@ void	print_vars(t_env *e);
 void	prompt(t_env *e);
 void	travaux(t_env *e);
 void	ft_setenv(t_env *e);
+void	ft_unsetenv(t_env *e);
+void	modif_env(t_env *e, char *var, char *val);
+void	usefull_vars(t_env *e, size_t i);
 
 #endif

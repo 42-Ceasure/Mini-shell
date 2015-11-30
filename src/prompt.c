@@ -1,36 +1,46 @@
 #include "shell.h"
 
-void ft_cd(t_env *e)
+void		change_dir(t_env *e, char *s)
 {
-	// char	*cwd;
-	// char	pwd[PATH_MAX + 1];
-	// char	new_pwd[PATH_MAX + 1];
+	char	*cwd;
+	char	pwd[PATH_MAX + 1];
 
-	// cwd = getcwd(pwd, PATH_MAX + 1);
-	// if (chdir(path) > -1)
-	// {
-	// 	if (cwd != NULL)
-	// 		arg->env = ft_setenv_do(arg, "OLDPWD", pwd);
-	// 	cwd = getcwd(new_pwd, PATH_MAX + 1);
-	// 	if (cwd != NULL)
-	// 		arg->env = ft_setenv_do(arg, "PWD", new_pwd);
-	// 	return (0);
-	// }
-	// else
-	// {
-	// 	if (path == NULL)
-	// 		ft_puterror("cd: No home directory.\n");
-	// 	else
-	// 		ft_path_error(path);
-	// }
-//////////////////
-	if (chdir(e->av[1]) != 0)
+	if (chdir(s) == 0)
+	{
+		modif_env(e, "OLDPWD", *e->pwd);
+		cwd = getcwd(pwd, PATH_MAX + 1);
+		if (cwd != NULL)
+			modif_env(e, "PWD", pwd);
+	}
+	else
 	{
 		ft_putstr("c-sh : \"");
 		ft_putstr(e->av[1]);
 		ft_putendl("\" : exist only in your imagination");
 	}
-	// recalc_pwd(e);
+}
+
+void		ft_cd(t_env *e)
+{
+	char	*lol;
+	char	*tmp;
+
+	lol = NULL;
+	tmp = NULL;
+	if (e->av[1] == NULL || !ft_strcmp(e->av[1], "~"))
+		change_dir(e, *e->home);
+	else if (!strncmp(e->av[1], "~/", 2))
+	{
+		tmp = ft_strsub(e->av[1], 1, (ft_strlen(e->av[1]) - 1));
+		lol = ft_strjoin(*e->home, tmp);
+		change_dir(e, lol);
+		free(tmp);
+		free(lol);
+	}
+	else if (!strcmp(e->av[1], "-"))
+		change_dir(e, *e->oldpwd);
+	else
+		change_dir(e, e->av[1]);
 	prompt(e);
 }
 
@@ -87,8 +97,8 @@ void inspection(t_env *e)
 		print_vars(e);
 	else if (!ft_strcmp(e->av[0], "setenv"))
 		ft_setenv(e);
-	// if (!ft_strcmp(e->av[0], "unsetenv"))
-	// 	ft_unsetenv();
+	else if (!ft_strcmp(e->av[0], "unsetenv"))
+		ft_unsetenv(e);
 	else if (!ft_strcmp(e->av[0], "cd"))
 		ft_cd(e);
 	else
@@ -98,6 +108,5 @@ void inspection(t_env *e)
 void parse_cmd(t_env *e, char *buf)
 {
 	memreg(e->av);
-	e->av = NULL;
 	e->av = ft_strsplit(buf, ' ');
 }

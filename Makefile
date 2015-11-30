@@ -21,7 +21,9 @@ NAME = shell
 SRCDIR=		./src/
 SRC=		main.c\
 			env.c\
-			prompt.c
+			prompt.c\
+			setenv.c\
+			unsetenv.c
 
 SRCFIL=		$(addprefix $(SRCDIR),$(SRC))
 

@@ -26,4 +26,5 @@ void memreg(char **s)
 		}
 	}
 	free(s);
+	s = NULL;
 }
