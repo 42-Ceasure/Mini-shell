@@ -27,13 +27,14 @@ typedef struct	s_env
 	int		ac;
 }				t_env;
 
-void inspection(t_env *e);
-void memreg(t_env *e, char *buf);
-void parse_env(t_env *e, char **ep);
-void parse_cmd(t_env *e, char *buf);
-void print_env(t_env *e);
-void print_vars(t_env *e);
-void prompt(t_env *e);
-void travaux(t_env *e);
+void	inspection(t_env *e);
+void	memreg(char **s);
+void	parse_env(t_env *e, char **ep);
+void	parse_cmd(t_env *e, char *buf);
+void	print_env(t_env *e);
+void	print_vars(t_env *e);
+void	prompt(t_env *e);
+void	travaux(t_env *e);
+void	ft_setenv(t_env *e);
 
 #endif

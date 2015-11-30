@@ -85,8 +85,8 @@ void inspection(t_env *e)
 		print_env(e);
 	else if (!ft_strcmp(e->av[0], "print_vars"))
 		print_vars(e);
-	// if (!ft_strcmp(e->av[0], "setenv"))
-	// 	ft_setenv();
+	if (!ft_strcmp(e->av[0], "setenv"))
+		ft_setenv(e);
 	// if (!ft_strcmp(e->av[0], "unsetenv"))
 	// 	ft_unsetenv();
 	else if (!ft_strcmp(e->av[0], "cd"))
@@ -97,11 +97,7 @@ void inspection(t_env *e)
 
 void parse_cmd(t_env *e, char *buf)
 {
-	int i;
-
-	i = 0;
-	ft_strdel(e->av);
-	free(e->av);
+	memreg(e->av);
 	e->av = NULL;
 	e->av = ft_strsplit(buf, ' ');
 }

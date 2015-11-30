@@ -1,5 +1,55 @@
 #include "shell.h"
 
+void		ft_setenv(t_env *e)
+{
+	int		i;
+	char	*var;
+	char	*val;
+	char	**tmp;
+
+	i = 0;
+	var = NULL;
+	val = NULL;
+	tmp = NULL;
+	if (e->av[1])
+	{
+		if (strchr(e->av[1], '=') != NULL)
+		{
+			tmp = ft_strsplit(e->av[1], '=');
+			while (tmp[i])
+				i++;
+			if (i != 2)
+				ft_putendl("KO");
+			else
+			{
+				var = ft_strdup(tmp[0]);
+				val = ft_strdup(tmp[1]);
+			}
+			ft_putstr(var);
+			ft_putchar('=');
+			ft_putendl(val);
+			memreg(tmp);
+			free(var);
+			free(val);
+		}
+		else if (e->av[2])
+		{
+			var = ft_strdup(e->av[1]);
+			val = ft_strdup(e->av[2]);
+			ft_putstr(var);
+			ft_putchar('=');
+			ft_putendl(val);
+			free(var);
+			free(val);
+		}
+		else
+			ft_putendl("use setenv <var>=<val>\nor setenv <var> <val>");	
+	}
+	else
+		ft_putendl("use setenv <var>=<val>\nor setenv <var> <val>");
+	prompt(e);
+}
+
 void		print_env(t_env *e)
 {
 	int i;

@@ -13,8 +13,18 @@
 // 	tmp = e->pwd;
 // }
 
-void memreg(t_env *e, char *buf)
+void memreg(char **s)
 {
-	free(e->av);
-	free(buf);
+	int i;
+
+	i = 0;
+	if (s != NULL)
+	{
+		while (s[i])
+		{
+			free(s[i]);
+			i++;
+		}
+	}
+	free(s);
 }
