@@ -78,5 +78,6 @@ char	*ft_strctrim(const char *s, char c);
 char	**ft_strsplit(const char *s, char c);
 char	*ft_epur_tabul(const char *src);
 char	*ft_epur_str(const char *src);
+void	memreg(char **s);
 
 #endif

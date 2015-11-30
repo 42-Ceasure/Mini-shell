@@ -85,7 +85,7 @@ void inspection(t_env *e)
 		print_env(e);
 	else if (!ft_strcmp(e->av[0], "print_vars"))
 		print_vars(e);
-	if (!ft_strcmp(e->av[0], "setenv"))
+	else if (!ft_strcmp(e->av[0], "setenv"))
 		ft_setenv(e);
 	// if (!ft_strcmp(e->av[0], "unsetenv"))
 	// 	ft_unsetenv();
