@@ -1,28 +1,47 @@
 #include "shell.h"
 
-char		**new_env(t_env *e, char *lol, size_t i)
+char		**new_env(t_env *e, char *lol)
 {
 	char	**tmp;
 	int		varl;
+	size_t	i;
+	size_t	j;
+	int		mem;
 
-	tmp = (char **)ft_memalloc(sizeof(char *) * (i + 1));
 	i = 0;
+	mem = 0;
 	varl = ft_strlen(lol);
 	while (e->env[i])
 	{
 		if (!ft_strncmp(e->env[i], lol, varl))
-		{
-			tmp[i] = ft_strdup(e->env[i]);
-			ft_putendl("ooo");
-			i++;
-		}
-		ft_putendl("=(");
-		tmp[i] = ft_strdup(e->env[i + 1]);
+			mem = 1;
 		i++;
 	}
-	ft_putendl("lol");
-	memreg(e->env);
-	return (tmp);
+	if (mem == 1)
+	{
+		tmp = (char **)ft_memalloc(sizeof(char *) * i);
+		i = 0;
+		while (e->env[i] && ft_strncmp(e->env[i], lol, varl) != 0)
+		{
+			tmp[i] = ft_strdup(e->env[i]);
+			i++;
+		}
+		j = i;
+		i = i + 1;
+		while (e->env[i])
+		{
+			tmp[j] = ft_strdup(e->env[i]);
+			i++;
+			j++;
+		}
+		memreg(e->env);
+		return (tmp);
+	}
+	else
+	{
+		ft_putendl("no var");
+		return (e->env);
+	}
 }
 
 void		ft_unsetenv(t_env *e)
@@ -37,7 +56,7 @@ void		ft_unsetenv(t_env *e)
 		e->i++;
 	if (e->av[1])
 	{
-		e->env = new_env(e, lol, (e->i - 1));
+		e->env = new_env(e, lol);
 		e->i = 0;
 		while (e->env[e->i])
 		{
