@@ -16,9 +16,9 @@ void	ft_putnbr(int nb)
 {
 	if (nb == 0)
 		ft_putchar('0');
-	if (nb == -2147483648)
+	if (nb == INT_MIN)
 		ft_putstr("-2147483648");
-	if (nb < 0 && nb != -2147483648)
+	if (nb < 0 && nb != INT_MIN)
 	{
 		ft_putchar('-');
 		nb = nb * -1;

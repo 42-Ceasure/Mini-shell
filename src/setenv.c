@@ -100,7 +100,7 @@ void		ft_setenv(t_env *e)
 	var = NULL;
 	val = NULL;
 	tmp = NULL;
-	if (e->av[1] && !e->av[3])
+	if (e->av[1])
 	{
 		loool(e, tmp, var, val);
 	}
