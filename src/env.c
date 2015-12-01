@@ -28,7 +28,6 @@ void		print_env(t_env *e)
 			i++;
 		}
 	}
-	ft_putchar('\n');
 	prompt(e);
 }
 
@@ -45,8 +44,9 @@ void		print_vars(t_env *e)
 		ft_putendl(*e->home);
 	else if (!ft_strcmp(e->av[1], "paths"))
 	{
-		while (*path)
-			ft_putendl(*path++);
+		if (path)
+			while (*path)
+				ft_putendl(*path++);
 	}
 	ft_putchar('\n');
 	prompt(e);

@@ -18,8 +18,18 @@ char		**add_env(t_env *e, char *lel, size_t i)
 
 void		looooool(t_env *e, size_t mem, char *lol, char *lel)
 {
+	if (mem == 1)
+		usefull_vars(e, e->i);
 	if (mem == 0)
+	{
 		e->env = add_env(e, lel, e->i);
+		e->i = 0;
+		while (e->env[e->i])
+		{
+			usefull_vars(e, e->i);
+			e->i++;
+		}
+	}
 	free(lol);
 	free(lel);
 }
@@ -47,30 +57,33 @@ void		modif_env(t_env *e, char *var, char *val)
 		}
 		e->i++;
 	}
-	usefull_vars(e, e->i);
 	looooool(e, mem, lol, lel);
 }
 
 void		loool(t_env *e, char **tmp, char *var, char *val)
 {
-	if (e->av[3])
-		ft_putendl("use setenv <var>=<val>\nor setenv <var> <val>");	
-	else if (strchr(e->av[1], '=') != NULL && e->av[2] == NULL)
-	{
-		tmp = ft_strsplit(e->av[1], '=');
-		while (tmp[e->i])
-			e->i++;
-		var = ft_strdup(tmp[0]);
-		if (e->i == 2)
-			val = ft_strdup(tmp[1]);
-		memreg(tmp);
-	}
-	else
+	if (e->av[1] && e->av[2])
 	{
 		var = ft_strdup(e->av[1]);
-		if (e->av[2])
-			val = ft_strdup(e->av[2]);
+		val = ft_strdup(e->av[2]);
 	}
+	else if (e->av[1] && !e->av[2])
+	{
+		if (strchr(e->av[1], '=') != NULL)
+		{
+			tmp = ft_strsplit(e->av[1], '=');
+			while (tmp[e->i])
+				e->i++;
+			var = ft_strdup(tmp[0]);
+			if (e->i == 2)
+				val = ft_strdup(tmp[1]);
+			memreg(tmp);
+		}
+		else
+			var = ft_strdup(e->av[1]);
+	}
+	else
+		ft_putendl("use setenv <var>=<val>\nor setenv <var> <val>");
 	if (var)
 		modif_env(e, var, val);
 	free(var);
@@ -87,7 +100,7 @@ void		ft_setenv(t_env *e)
 	var = NULL;
 	val = NULL;
 	tmp = NULL;
-	if (e->av[1])
+	if (e->av[1] && !e->av[3])
 	{
 		loool(e, tmp, var, val);
 	}

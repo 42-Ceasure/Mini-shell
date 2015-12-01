@@ -47,8 +47,10 @@ void		ft_cd(t_env *e)
 void prompt(t_env *e)
 {
 	(void)e;
-	// ft_putstr(*e->pwd);
-	ft_putstr("c-sh #>> ");
+	ft_putstr("\e[1m\e[38;5;42m");
+	ft_putstr(*e->pwd);
+	ft_putstr("\e[38;5;124m");
+	ft_putstr(" c-sh #>> \e[0m");
 }
 
 void travaux(t_env *e)
@@ -66,22 +68,32 @@ void travaux(t_env *e)
 	}
 	if (father == 0)
 	{
-		while (e->paths[i])
-		{
-			if ((dir = opendir(ft_strjoin(e->paths[i], "/"))))
+		if (e->paths)
+		{	
+			while (e->paths[i])
 			{
-				if (!access(e->av[0], X_OK))
-					execve(e->av[0], e->av, e->env);
-				if (!access(ft_strjoin(e->paths[i], ft_strjoin("/", e->av[0])), X_OK))
-					execve(ft_strjoin(e->paths[i], ft_strjoin("/", e->av[0])), e->av, e->env);
-				closedir(dir);
+				if ((dir = opendir(ft_strjoin(e->paths[i], "/"))))
+				{
+					if (!access(e->av[0], X_OK))
+						execve(e->av[0], e->av, e->env);
+					if (!access(ft_strjoin(e->paths[i], ft_strjoin("/", e->av[0])), X_OK))
+						execve(ft_strjoin(e->paths[i], ft_strjoin("/", e->av[0])), e->av, e->env);
+					closedir(dir);
+				}
+				i++;
 			}
-			i++;
+			ft_putstr("c-sh : \'");
+			ft_putstr(e->av[0]);
+			ft_putendl("\' : command not found");
+			exit(0);
 		}
-		ft_putstr("c-sh : \'");
-		ft_putstr(e->av[0]);
-		ft_putendl("\' : command not found");
-		exit(0);
+		else
+		{
+			ft_putstr("c-sh : \'");
+			ft_putstr(e->av[0]);
+			ft_putendl("\' : command not found");
+			exit(0);	
+		}
 	}
 }
 
