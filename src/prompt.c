@@ -11,37 +11,23 @@ void		change_dir(t_env *e, char *s)
 		cwd = getcwd(pwd, PATH_MAX + 1);
 		if (cwd != NULL)
 			modif_env(e, "PWD", pwd);
+		prompt(e);
 	}
 	else
 	{
 		ft_putstr("c-sh : \"");
 		ft_putstr(e->av[1]);
 		ft_putendl("\" : exist only in your imagination");
+		prompt(e);
 	}
 }
 
 void		ft_cd(t_env *e)
 {
-	char	*lol;
-	char	*tmp;
-
-	lol = NULL;
-	tmp = NULL;
-	if (e->av[1] == NULL || !ft_strcmp(e->av[1], "~"))
+	if (e->av[1] == NULL)
 		change_dir(e, *e->home);
-	else if (!strncmp(e->av[1], "~/", 2))
-	{
-		tmp = ft_strsub(e->av[1], 1, (ft_strlen(e->av[1]) - 1));
-		lol = ft_strjoin(*e->home, tmp);
-		change_dir(e, lol);
-		free(tmp);
-		free(lol);
-	}
-	else if (!strcmp(e->av[1], "-"))
-		change_dir(e, *e->oldpwd);
 	else
 		change_dir(e, e->av[1]);
-	prompt(e);
 }
 
 void prompt(t_env *e)
@@ -97,6 +83,39 @@ void travaux(t_env *e)
 	}
 }
 
+void check_tild_minus(t_env *e, size_t z)
+{
+	size_t	i;
+	char	*tmp;
+	char 	*lol;
+
+	tmp = NULL;
+	lol = NULL;
+	i = ft_strlen(e->av[z]);
+	if (i == 1 && !strncmp(e->av[z], "~", 1))
+		e->av[z] = ft_strdup(*e->home);
+	else if (i > 1 && !strncmp(e->av[z], "~/", 2))
+	{
+			tmp = ft_strsub(e->av[z], 1, (ft_strlen(e->av[z]) - 1));
+			lol = ft_strjoin(*e->home, tmp);
+			free(e->av[z]);
+			e->av[z] = ft_strdup(lol);
+			free(tmp);
+			free(lol);
+	}
+	else if (i == 1 && !strncmp(e->av[z], "-", 1))
+		e->av[z] = ft_strdup(*e->oldpwd);
+	else if (i > 1 && !strncmp(e->av[z], "-/", 2))
+	{
+			tmp = ft_strsub(e->av[z], 1, (ft_strlen(e->av[z]) - 1));
+			lol = ft_strjoin(*e->oldpwd, tmp);
+			free(e->av[z]);
+			e->av[z] = ft_strdup(lol);
+			free(tmp);
+			free(lol);
+	}
+}
+
 void inspection(t_env *e)
 {
 	if (e->av[0] == NULL)
@@ -113,6 +132,11 @@ void inspection(t_env *e)
 		ft_unsetenv(e);
 	else if (!ft_strcmp(e->av[0], "cd"))
 		ft_cd(e);
+	else if (!ft_strncmp(e->av[0], "~", 1) || !ft_strncmp(e->av[0], "-", 1))
+	{
+		check_tild_minus(e, 0);
+		change_dir(e, e->av[0]);
+	}
 	else
 		travaux(e);
 }
@@ -121,4 +145,6 @@ void parse_cmd(t_env *e, char *buf)
 {
 	memreg(e->av);
 	e->av = ft_strsplit(buf, ' ');
+	if (e->av[1])
+		check_tild_minus(e, 1);
 }

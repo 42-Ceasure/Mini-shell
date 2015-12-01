@@ -24,7 +24,7 @@ void memreg(char **s)
 			free(s[i]);
 			i++;
 		}
+		free(s);
 	}
-	free(s);
 	s = NULL;
 }
