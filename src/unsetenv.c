@@ -73,6 +73,7 @@ void		ft_unsetenv(t_env *e)
 	{
 		e->env = new_env(e, lol, varl);
 		unset_utils(e, lol, varl);
+		// re_usefull_vars(e);
 	}
 	else
 		ft_putendl("use unsetenv <var>");

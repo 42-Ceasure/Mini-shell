@@ -16,7 +16,7 @@ char		**add_env(t_env *e, char *lel, size_t i)
 	return (tmp);
 }
 
-void		looooool(t_env *e, size_t mem, char *lol, char *lel)
+void		do_mod(t_env *e, size_t mem, char *lol, char *lel)
 {
 	if (mem == 1)
 		usefull_vars(e, e->i);
@@ -24,11 +24,7 @@ void		looooool(t_env *e, size_t mem, char *lol, char *lel)
 	{
 		e->env = add_env(e, lel, e->i);
 		e->i = 0;
-		while (e->env[e->i])
-		{
-			usefull_vars(e, e->i);
-			e->i++;
-		}
+		re_usefull_vars(e);
 	}
 	free(lol);
 	free(lel);
@@ -57,10 +53,10 @@ void		modif_env(t_env *e, char *var, char *val)
 		}
 		e->i++;
 	}
-	looooool(e, mem, lol, lel);
+	do_mod(e, mem, lol, lel);
 }
 
-void		loool(t_env *e, char **tmp, char *var, char *val)
+void		check(t_env *e, char **tmp, char *var, char *val)
 {
 	if (e->av[1] && e->av[2])
 	{
@@ -102,7 +98,7 @@ void		ft_setenv(t_env *e)
 	tmp = NULL;
 	if (e->av[1])
 	{
-		loool(e, tmp, var, val);
+		check(e, tmp, var, val);
 	}
 	else
 		ft_putendl("use setenv <var>=<val>\nor setenv <var> <val>\n");

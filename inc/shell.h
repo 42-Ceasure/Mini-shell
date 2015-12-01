@@ -39,5 +39,6 @@ void	ft_setenv(t_env *e);
 void	ft_unsetenv(t_env *e);
 void	modif_env(t_env *e, char *var, char *val);
 void	usefull_vars(t_env *e, size_t i);
+void	re_usefull_vars(t_env *e);
 
 #endif

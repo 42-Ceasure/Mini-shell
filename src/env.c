@@ -1,5 +1,17 @@
 #include "shell.h"
 
+void		re_usefull_vars(t_env *e)
+{
+	int		i;
+
+	i = 0;
+	while (e->env[i])
+	{
+		usefull_vars(e, i);
+		i++;
+	}
+}
+
 void		usefull_vars(t_env *e, size_t i)
 {
 	if (!ft_strncmp(e->env[i], "PWD=", 4))

@@ -69,7 +69,7 @@ void travaux(t_env *e)
 	if (father == 0)
 	{
 		if (e->paths)
-		{	
+		{
 			while (e->paths[i])
 			{
 				if ((dir = opendir(ft_strjoin(e->paths[i], "/"))))
