@@ -11,14 +11,12 @@ void		change_dir(t_env *e, char *s)
 		cwd = getcwd(pwd, PATH_MAX + 1);
 		if (cwd != NULL)
 			modif_env(e, "PWD", pwd);
-		prompt(e);
 	}
 	else
 	{
 		ft_putstr("c-sh : \"");
 		ft_putstr(e->av[1]);
 		ft_putendl("\" : exist only in your imagination");
-		prompt(e);
 	}
 }
 
@@ -30,13 +28,14 @@ void		ft_cd(t_env *e)
 		change_dir(e, e->av[1]);
 }
 
-void prompt(t_env *e)
+int prompt(t_env *e)
 {
 	(void)e;
 	ft_putstr("\e[1m\e[38;5;42m");
 	ft_putstr(*e->pwd);
 	ft_putstr("\e[38;5;124m");
 	ft_putstr(" c-sh #>> \e[0m");
+	return (1);
 }
 
 void travaux(t_env *e)
@@ -48,10 +47,7 @@ void travaux(t_env *e)
 	i = 0;
 	father = fork();
 	if (father > 0)
-	{
 		waitpid(father, NULL, 0);
-		prompt(e);
-	}
 	if (father == 0)
 	{
 		if (e->paths)
@@ -93,7 +89,10 @@ void check_tild_minus(t_env *e, size_t z)
 	lol = NULL;
 	i = ft_strlen(e->av[z]);
 	if (i == 1 && !strncmp(e->av[z], "~", 1))
+	{
+		free(e->av[z]);
 		e->av[z] = ft_strdup(*e->home);
+	}
 	else if (i > 1 && !strncmp(e->av[z], "~/", 2))
 	{
 			tmp = ft_strsub(e->av[z], 1, (ft_strlen(e->av[z]) - 1));
@@ -104,12 +103,15 @@ void check_tild_minus(t_env *e, size_t z)
 			free(lol);
 	}
 	else if (i == 1 && !strncmp(e->av[z], "-", 1))
+	{
+		free(e->av[z]);
 		e->av[z] = ft_strdup(*e->oldpwd);
+	}
 	else if (i > 1 && !strncmp(e->av[z], "-/", 2))
 	{
 			tmp = ft_strsub(e->av[z], 1, (ft_strlen(e->av[z]) - 1));
 			lol = ft_strjoin(*e->oldpwd, tmp);
-			free(e->av[z]);
+			free(e->av[z]);	
 			e->av[z] = ft_strdup(lol);
 			free(tmp);
 			free(lol);
@@ -118,9 +120,7 @@ void check_tild_minus(t_env *e, size_t z)
 
 void inspection(t_env *e)
 {
-	if (e->av[0] == NULL)
-		prompt(e);
-	else if (!ft_strcmp(e->av[0], "exit"))
+	if (!ft_strcmp(e->av[0], "exit"))
 		exit(0);
 	else if (!ft_strcmp(e->av[0], "env"))
 		print_env(e);

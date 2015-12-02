@@ -33,23 +33,36 @@ void ft_swagg(char *s)
 		ft_putchar('\n');
 }
 
+void handler(int sig)
+{
+	(void)sig;
+	ft_putchar('\n');
+}
+
 int main(int ac, char **av, char **ep)
 {
 	t_env	*e;
 	char 	*buf;
 
-	(void)av;
+	signal(SIGINT, handler);
+	buf = NULL;
 	if (ac == 1)
 	{
-		// ft_swagg(av[0]);
+		ft_swagg(av[0]);
 		e = (t_env *)ft_memalloc(sizeof(t_env));
 		parse_env(e, ep);
 		prompt(e);
-		while (get_next_line(0, &buf) != 0)
+		while ((get_next_line(0, &buf) != 0))
 		{
-			parse_cmd(e, buf);
-			inspection(e);
-			free(buf);
+			if (buf[0] != '\0')
+			{
+				parse_cmd(e, buf);
+				inspection(e);
+				free(buf);
+			}
+			else
+				free(buf);
+			prompt(e);
 		}
 	}
 	else

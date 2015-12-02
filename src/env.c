@@ -40,7 +40,6 @@ void		print_env(t_env *e)
 			i++;
 		}
 	}
-	prompt(e);
 }
 
 void		print_vars(t_env *e)
@@ -61,7 +60,6 @@ void		print_vars(t_env *e)
 				ft_putendl(*path++);
 	}
 	ft_putchar('\n');
-	prompt(e);
 }
 
 void		parse_env(t_env *e, char **ep)

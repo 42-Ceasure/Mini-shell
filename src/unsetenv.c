@@ -81,5 +81,4 @@ void		ft_unsetenv(t_env *e)
 	free(var);
 	lol = NULL;
 	var = NULL;
-	prompt(e);
 }
