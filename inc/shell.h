@@ -23,10 +23,10 @@ typedef struct	s_env
 	size_t	i;
 }				t_env;
 
-extern char	**g_pwd;
-extern char	**g_oldpwd;
-extern char **g_home;
-extern char	**g_paths;
+char	**g_pwd;
+char	**g_oldpwd;
+char	**g_home;
+char	**g_paths;
 
 void	inspection(t_env *e);
 void	parse_env(t_env *e, char **ep);

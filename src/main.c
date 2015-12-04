@@ -1,11 +1,6 @@
 
 #include "shell.h"
 
-char	**g_pwd;
-char	**g_oldpwd;
-char	**g_home;
-char	**g_paths;
-
 int main(int ac, char **av, char **ep)
 {
 	t_env	*e;
