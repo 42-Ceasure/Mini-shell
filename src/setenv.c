@@ -101,5 +101,5 @@ void		ft_setenv(t_env *e)
 		check(e, tmp, var, val);
 	}
 	else
-		ft_putendl("use setenv <var>=<val>\nor setenv <var> <val>\n");
+		ft_putendl("use setenv <var>=<val>\nor setenv <var> <val>");
 }
