@@ -4,13 +4,16 @@ void		change_dir(t_env *e, char *s)
 {
 	char	*cwd;
 	char	pwd[PATH_MAX + 1];
+	char	npwd[PATH_MAX + 1];
 
+	cwd = getcwd(pwd, PATH_MAX + 1);
 	if (chdir(s) == 0)
 	{
-		modif_env(e, "OLDPWD", *e->pwd);
-		cwd = getcwd(pwd, PATH_MAX + 1);
 		if (cwd != NULL)
-			modif_env(e, "PWD", pwd);
+			modif_env(e, "OLDPWD", pwd);
+		cwd = getcwd(npwd, PATH_MAX + 1);
+		if (cwd != NULL)
+			modif_env(e, "PWD", npwd);
 	}
 	else
 	{
@@ -23,19 +26,27 @@ void		change_dir(t_env *e, char *s)
 void		ft_cd(t_env *e)
 {
 	if (e->av[1] == NULL)
-		change_dir(e, *e->home);
+	{
+		if (*g_home != NULL)
+			change_dir(e, *g_home);
+		else
+			ft_putendl("no home directory");	
+	}
+	// else if (e->av[1] == NULL && !*g_home)
+	// 	ft_putendl("no home directory");
 	else
 		change_dir(e, e->av[1]);
 }
 
-int prompt(t_env *e)
+void prompt(void)
 {
-	(void)e;
-	ft_putstr("\e[1m\e[38;5;42m");
-	ft_putstr(*e->pwd);
+	if (g_pwd)
+	{
+		ft_putstr("\e[1m\e[38;5;42m");
+		ft_putstr(*g_pwd);
+	}
 	ft_putstr("\e[38;5;124m");
 	ft_putstr(" c-sh #>> \e[0m");
-	return (1);
 }
 
 void travaux(t_env *e)
@@ -50,16 +61,16 @@ void travaux(t_env *e)
 		waitpid(father, NULL, 0);
 	if (father == 0)
 	{
-		if (e->paths)
+		if (!access(e->av[0], X_OK))
+			execve(e->av[0], e->av, e->env);
+		if (g_paths)
 		{
-			while (e->paths[i])
+			while (g_paths[i])
 			{
-				if ((dir = opendir(ft_strjoin(e->paths[i], "/"))))
+				if ((dir = opendir(ft_strjoin(g_paths[i], "/"))))
 				{
-					if (!access(e->av[0], X_OK))
-						execve(e->av[0], e->av, e->env);
-					if (!access(ft_strjoin(e->paths[i], ft_strjoin("/", e->av[0])), X_OK))
-						execve(ft_strjoin(e->paths[i], ft_strjoin("/", e->av[0])), e->av, e->env);
+					if (!access(ft_strjoin(g_paths[i], ft_strjoin("/", e->av[0])), X_OK))
+						execve(ft_strjoin(g_paths[i], ft_strjoin("/", e->av[0])), e->av, e->env);
 					closedir(dir);
 				}
 				i++;
@@ -91,12 +102,12 @@ void check_tild_minus(t_env *e, size_t z)
 	if (i == 1 && !strncmp(e->av[z], "~", 1))
 	{
 		free(e->av[z]);
-		e->av[z] = ft_strdup(*e->home);
+		e->av[z] = ft_strdup(*g_home);
 	}
 	else if (i > 1 && !strncmp(e->av[z], "~/", 2))
 	{
 			tmp = ft_strsub(e->av[z], 1, (ft_strlen(e->av[z]) - 1));
-			lol = ft_strjoin(*e->home, tmp);
+			lol = ft_strjoin(*g_home, tmp);
 			free(e->av[z]);
 			e->av[z] = ft_strdup(lol);
 			free(tmp);
@@ -105,12 +116,12 @@ void check_tild_minus(t_env *e, size_t z)
 	else if (i == 1 && !strncmp(e->av[z], "-", 1))
 	{
 		free(e->av[z]);
-		e->av[z] = ft_strdup(*e->oldpwd);
+		e->av[z] = ft_strdup(*g_oldpwd);
 	}
 	else if (i > 1 && !strncmp(e->av[z], "-/", 2))
 	{
 			tmp = ft_strsub(e->av[z], 1, (ft_strlen(e->av[z]) - 1));
-			lol = ft_strjoin(*e->oldpwd, tmp);
+			lol = ft_strjoin(*g_oldpwd, tmp);
 			free(e->av[z]);	
 			e->av[z] = ft_strdup(lol);
 			free(tmp);

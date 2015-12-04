@@ -15,15 +15,15 @@ void		re_usefull_vars(t_env *e)
 void		usefull_vars(t_env *e, size_t i)
 {
 	if (!ft_strncmp(e->env[i], "PWD=", 4))
-		*e->pwd = &e->env[i][4];
+		*g_pwd = &e->env[i][4];
 	else if (!ft_strncmp(e->env[i], "OLDPWD=", 7))
-		*e->oldpwd = &e->env[i][7];
+		*g_oldpwd = &e->env[i][7];
 	else if (!ft_strncmp(e->env[i], "HOME=", 5))
-		*e->home = &e->env[i][5];
+		*g_home = &e->env[i][5];
 	else if (!ft_strncmp(e->env[i], "PATH=", 5))
 	{
-		memreg(e->paths);
-		e->paths = ft_strsplit(&e->env[i][5], ':');
+		memreg(g_paths);
+		g_paths = ft_strsplit(&e->env[i][5], ':');
 	}
 }
 
@@ -46,13 +46,13 @@ void		print_vars(t_env *e)
 {
 	char 	**path;
 
-	path = e->paths;
+	path = g_paths;
 	if (!ft_strcmp(e->av[1], "pwd"))
-		ft_putendl(*e->pwd);
+		ft_putendl(*g_pwd);
 	else if (!ft_strcmp(e->av[1], "old_pwd"))
-		ft_putendl(*e->oldpwd);
+		ft_putendl(*g_oldpwd);
 	else if (!ft_strcmp(e->av[1], "home"))
-		ft_putendl(*e->home);
+		ft_putendl(*g_home);
 	else if (!ft_strcmp(e->av[1], "paths"))
 	{
 		if (path)
@@ -70,15 +70,25 @@ void		parse_env(t_env *e, char **ep)
 	while (ep[i] != NULL)
 		i++;
 	e->env = (char **)ft_memalloc(sizeof(char *) * i + 1);
-	e->pwd = (char **)ft_memalloc(sizeof(char *));
-	e->oldpwd = (char **)ft_memalloc(sizeof(char *));
-	e->home = (char **)ft_memalloc(sizeof(char *));
-	e->paths = NULL;
-	i = 0;
-	while (ep[i])
+	g_pwd = (char **)ft_memalloc(sizeof(char *));
+	g_oldpwd = (char **)ft_memalloc(sizeof(char *));
+	g_home = (char **)ft_memalloc(sizeof(char *));
+	g_paths = NULL;
+	if (i != 0)
 	{
-		e->env[i] = ft_strdup(ep[i]);
-		usefull_vars(e, i);
-		i++;
+		i = 0;
+		while (ep[i])
+		{
+			e->env[i] = ft_strdup(ep[i]);
+			usefull_vars(e, i);
+			i++;
+		}
+	}
+	else
+	{
+		e->env[0] = NULL;
+		*g_pwd = NULL;
+		*g_oldpwd = NULL;
+		*g_home = NULL;
 	}
 }

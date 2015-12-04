@@ -23,7 +23,8 @@ SRC=		main.c\
 			env.c\
 			prompt.c\
 			setenv.c\
-			unsetenv.c
+			unsetenv.c\
+			sig.c
 
 SRCFIL=		$(addprefix $(SRCDIR),$(SRC))
 

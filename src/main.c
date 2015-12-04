@@ -1,66 +1,10 @@
 
 #include "shell.h"
 
-void ft_swagg(char *s)
-{
-		ft_putstr("launching ");
-		ft_putendl(s);
-		// usleep(500000);
-		ft_putstr("\e[1m\e[38;5;166m");
-		ft_putendl(";-.               ,");
-		// usleep(500000);
-		ft_putendl(" \\ '.           .'/");
-		// usleep(500000);
-		ft_putendl("  \\  \\ .---. .-' /");
-		// usleep(500000);
-		ft_putendl("   '. '     `\\_.'");
-		// usleep(500000);
-		ft_putstr("     |(),()  |     ");
-		ft_putstr("\e[1m\e[38;5;186m");
-		ft_putendl(",");
-		ft_putstr("\e[1m\e[38;5;166m");
-		// usleep(500000);
-		ft_putstr("     (  __   /   ");
-		ft_putstr("\e[1m\e[38;5;186m");
-		ft_putendl(".' \\");
-		// usleep(500000);	
-		ft_putstr("    .'");
-		ft_putstr("\e[1m\e[38;5;166m");
-		ft_putstr("'.___.'");
-		ft_putstr("\e[1m\e[38;5;186m");
-		ft_putstr("--,");
-		ft_putstr("\e[1m\e[38;5;166m");
-		ft_putstr("/");
-		ft_putstr("\e[1m\e[38;5;186m");
-		ft_putendl("\\_,|");
-		// usleep(500000);
-		ft_putstr("   {  /     \\   }   ");
-		ft_putstr("\e[1m\e[38;5;166m");
-		ft_putendl("|");
-		// usleep(500000);
-		ft_putstr("\e[1m\e[38;5;186m");
-		ft_putstr("    '.\\     /_.'    ");
-		ft_putstr("\e[1m\e[38;5;166m");
-		ft_putendl("/");
-		// usleep(500000);
-		ft_putstr("      \\");
-		ft_putstr("\e[1m\e[38;5;186m");
-		ft_putstr("'-.-'");
-		ft_putstr("\e[1m\e[38;5;166m");
-		ft_putendl("/ `; _.'");
-		// usleep(500000);
-		ft_putendl("       | | |  /");
-		// usleep(500000);
-		ft_putendl("      `\"\"'\"`\"\"`");
-		// usleep(500000);
-		ft_putendl("\e[0m");
-}
-
-void handler(int sig)
-{
-	(void)sig;
-	ft_putchar('\n');
-}
+char	**g_pwd;
+char	**g_oldpwd;
+char	**g_home;
+char	**g_paths;
 
 int main(int ac, char **av, char **ep)
 {
@@ -74,7 +18,7 @@ int main(int ac, char **av, char **ep)
 		ft_swagg(av[0]);
 		e = (t_env *)ft_memalloc(sizeof(t_env));
 		parse_env(e, ep);
-		prompt(e);
+		prompt();
 		while ((get_next_line(0, &buf) != 0))
 		{
 			if (buf[0] != '\0')
@@ -85,7 +29,7 @@ int main(int ac, char **av, char **ep)
 			}
 			else
 				free(buf);
-			prompt(e);
+			prompt();
 		}
 	}
 	else

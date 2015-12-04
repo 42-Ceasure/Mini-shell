@@ -2,16 +2,17 @@
 
 void		unset_utils(t_env *e, char *lol, int varl)
 {
+	(void)e;
 	if (!ft_strncmp(lol, "PWD=", varl))
-		*e->pwd = NULL;
+		*g_pwd = NULL;
 	else if (!ft_strncmp(lol, "OLDPWD=", varl))
-		*e->oldpwd = NULL;
+		*g_oldpwd = NULL;
 	else if (!ft_strncmp(lol, "HOME=", varl))
-		*e->home = NULL;
+		*g_home = NULL;
 	else if (!ft_strncmp(lol, "PATH=", varl))
 	{
-		memreg(e->paths);
-		e->paths = NULL;
+		memreg(g_paths);
+		g_paths = NULL;
 	}
 }
 

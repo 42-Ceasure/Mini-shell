@@ -20,25 +20,27 @@ typedef struct	s_env
 {
 	char	**env;
 	char	**av;
-	char	**pwd;
-	char	**oldpwd;
-	char	**home;
-	char	**paths;
 	size_t	i;
-	int		ac;
 }				t_env;
+
+extern char	**g_pwd;
+extern char	**g_oldpwd;
+extern char **g_home;
+extern char	**g_paths;
 
 void	inspection(t_env *e);
 void	parse_env(t_env *e, char **ep);
 void	parse_cmd(t_env *e, char *buf);
 void	print_env(t_env *e);
 void	print_vars(t_env *e);
-int		prompt(t_env *e);
+void	prompt(void);
 void	travaux(t_env *e);
 void	ft_setenv(t_env *e);
 void	ft_unsetenv(t_env *e);
 void	modif_env(t_env *e, char *var, char *val);
 void	usefull_vars(t_env *e, size_t i);
 void	re_usefull_vars(t_env *e);
+void	ft_swagg(char *s);
+void	handler(int sig);
 
 #endif
