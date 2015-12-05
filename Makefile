@@ -29,6 +29,7 @@ SRC=		main.c\
 			builtin_env.c\
 			builtin_cd.c\
 			sig.c\
+			tildminus.c
 
 SRCFIL=		$(addprefix $(SRCDIR),$(SRC))
 
