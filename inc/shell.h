@@ -45,7 +45,9 @@ void	ft_setenv(t_env *e);
 void	ft_unsetenv(t_env *e);
 void	print_env(t_env *e);
 void	print_vars(t_env *e);
-
-
+void	ft_swagg(char *s);
+void	check_tild_minus(t_env *e, size_t z);
+void	ft_cd(t_env *e);
+void	change_dir(t_env *e, char *s);
 
 #endif

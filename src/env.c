@@ -1,3 +1,4 @@
+
 #include "shell.h"
 
 void		re_usefull_vars(t_env *e)
@@ -33,11 +34,14 @@ void		init_null(t_env *e)
 	*g_pwd = NULL;
 	*g_oldpwd = NULL;
 	*g_home = NULL;
+	ft_putstr("\n/!\\ Warning, you have no PATH");
+	ft_putendl(" and no HOME var /!\\");
+	ft_putendl("           (you have no ENV at all...)\n");
 }
 
 void		parse_env(t_env *e, char **ep)
 {
-	size_t		i;
+	size_t	i;
 
 	i = 0;
 	while (ep[i] != NULL)

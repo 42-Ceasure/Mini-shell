@@ -20,12 +20,15 @@ NAME = shell
 
 SRCDIR=		./src/
 SRC=		main.c\
+			swagg.c\
 			env.c\
-			builtin_env.c\
-			prompt.c\
+			parse_cmd.c\
+			select_do.c\
 			setenv.c\
 			unsetenv.c\
-			sig.c
+			builtin_env.c\
+			builtin_cd.c\
+			sig.c\
 
 SRCFIL=		$(addprefix $(SRCDIR),$(SRC))
 

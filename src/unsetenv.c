@@ -1,8 +1,8 @@
+
 #include "shell.h"
 
-void		unset_utils(t_env *e, char *lol, int varl)
+void		unset_utils(char *lol, int varl)
 {
-	(void)e;
 	if (!ft_strncmp(lol, "PWD=", varl))
 		*g_pwd = NULL;
 	else if (!ft_strncmp(lol, "OLDPWD=", varl))
@@ -73,7 +73,7 @@ void		ft_unsetenv(t_env *e)
 	if (e->av[1])
 	{
 		e->env = new_env(e, lol, varl);
-		unset_utils(e, lol, varl);
+		unset_utils(lol, varl);
 		re_usefull_vars(e);
 	}
 	else
