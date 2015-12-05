@@ -28,19 +28,24 @@ char	**g_oldpwd;
 char	**g_home;
 char	**g_paths;
 
-void	inspection(t_env *e);
+void	ft_swagg(char *s);
+void	prompt(void);
+
+void	handler(int sig);
+
 void	parse_env(t_env *e, char **ep);
 void	parse_cmd(t_env *e, char *buf);
-void	print_env(t_env *e);
-void	print_vars(t_env *e);
-void	prompt(void);
-void	travaux(t_env *e);
-void	ft_setenv(t_env *e);
-void	ft_unsetenv(t_env *e);
+void	inspection(t_env *e);
+void	chk_n_ex_cmd(t_env *e);
+
 void	modif_env(t_env *e, char *var, char *val);
 void	usefull_vars(t_env *e, size_t i);
 void	re_usefull_vars(t_env *e);
-void	ft_swagg(char *s);
-void	handler(int sig);
+void	ft_setenv(t_env *e);
+void	ft_unsetenv(t_env *e);
+void	print_env(t_env *e);
+void	print_vars(t_env *e);
+
+
 
 #endif

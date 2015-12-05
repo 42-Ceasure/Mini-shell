@@ -21,6 +21,7 @@ NAME = shell
 SRCDIR=		./src/
 SRC=		main.c\
 			env.c\
+			builtin_env.c\
 			prompt.c\
 			setenv.c\
 			unsetenv.c\
