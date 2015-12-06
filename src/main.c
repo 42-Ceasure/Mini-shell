@@ -29,6 +29,7 @@ int			main(int ac, char **av, char **ep)
 		{
 			if (buf[0] != '\0')
 			{
+				e->mem = 2;
 				parse_cmd(e, buf);
 				if (e->mem == 2)
 					inspection(e);
