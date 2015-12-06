@@ -30,7 +30,8 @@ int			main(int ac, char **av, char **ep)
 			if (buf[0] != '\0')
 			{
 				parse_cmd(e, buf);
-				inspection(e);
+				if (e->mem == 2)
+					inspection(e);
 				free(buf);
 			}
 			else

@@ -20,6 +20,7 @@ typedef struct	s_env
 {
 	char	**env;
 	char	**av;
+		int			mem;
 	size_t	i;
 }				t_env;
 
@@ -32,6 +33,7 @@ void	ft_swagg(char *s);
 void	prompt(void);
 
 void	handler(int sig);
+void	handler2(int sig);
 
 void	parse_env(t_env *e, char **ep);
 void	parse_cmd(t_env *e, char *buf);
