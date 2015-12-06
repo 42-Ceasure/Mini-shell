@@ -33,7 +33,6 @@ void			parse_cmd(t_env *e, char *buf)
 			if (k != 1)
 			{
 				k--;
-				e->mem = 1;
 				child = fork();
 				if (child == 0)
 				{
@@ -53,7 +52,6 @@ void			parse_cmd(t_env *e, char *buf)
 						{
 							dup2(pdes[1], STDOUT_FILENO);
 							close(pdes[0]);
-							e->mem = 0;
 							k--;
 						}
 					}
@@ -89,7 +87,6 @@ void			parse_cmd(t_env *e, char *buf)
 		if (i != 1)
 		{
 			i--;
-			e->mem = 1;
 			child = fork();
 			if (child == 0)
 			{
@@ -109,7 +106,6 @@ void			parse_cmd(t_env *e, char *buf)
 					{
 						dup2(pdes[1], STDOUT_FILENO);
 						close(pdes[0]);
-						e->mem = 0;
 						i--;
 					}
 				}
@@ -128,7 +124,7 @@ void			parse_cmd(t_env *e, char *buf)
 		}
 		else
 		{
-
+			e->mem = 2;
 			memreg(e->av);
 			e->av = ft_strsplit(tmp2[0], ' ');
 			if (e->av[1])
