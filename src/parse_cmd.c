@@ -25,7 +25,7 @@ void			parse_cmd(t_env *e, char *buf)
 		i = 0;
 		while (tmp[i + 1])
 		{
-						j = 0;
+			j = 0;
 			tmp2 = ft_strsplit(tmp[i], '|');
 			k = 0;
 			while (tmp2[k])
@@ -61,16 +61,7 @@ void			parse_cmd(t_env *e, char *buf)
 					e->av = ft_strsplit(tmp2[j], ' ');
 					if (e->av[1])
 						check_tild_minus(e, 1);
-					if (e->mem == 0)
-					{
-						inspection(e);
-						exit(0);
-					}
-					else
-					{
-						inspection(e);
-						close(pdes[0]);
-					}
+					inspection(e);
 					exit(0);
 				}
 				if (child > 0)
@@ -85,6 +76,7 @@ void			parse_cmd(t_env *e, char *buf)
 				e->av = ft_strsplit(tmp2[0], ' ');
 				if (e->av[1])
 					check_tild_minus(e, 1);
+				inspection(e);
 			}
 			memreg(tmp2);
 			i++;
@@ -125,16 +117,7 @@ void			parse_cmd(t_env *e, char *buf)
 				e->av = ft_strsplit(tmp2[j], ' ');
 				if (e->av[1])
 					check_tild_minus(e, 1);
-				if (e->mem == 0)
-				{
-					inspection(e);
-					exit(0);
-				}
-				else
-				{
-					inspection(e);
-					close(pdes[0]);
-				}
+				inspection(e);
 				exit(0);
 			}
 			if (child > 0)
@@ -145,6 +128,7 @@ void			parse_cmd(t_env *e, char *buf)
 		}
 		else
 		{
+
 			memreg(e->av);
 			e->av = ft_strsplit(tmp2[0], ' ');
 			if (e->av[1])
@@ -190,16 +174,7 @@ void			parse_cmd(t_env *e, char *buf)
 				e->av = ft_strsplit(tmp2[j], ' ');
 				if (e->av[1])
 					check_tild_minus(e, 1);
-				if (e->mem == 0)
-				{
-					inspection(e);
-					exit(0);
-				}
-				else
-				{
-					inspection(e);
-					close(pdes[0]);
-				}
+				inspection(e);
 				exit(0);
 			}
 			if (child > 0)
