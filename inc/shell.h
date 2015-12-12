@@ -14,14 +14,15 @@
 # include <sys/uio.h>
 # include "libft.h"
 
-// # define PATH_MAX 1024
-
 typedef struct	s_env
 {
 	char	**env;
 	char	**av;
-		int			mem;
+	char	**tmp2;
+	int		mem;
 	size_t	i;
+	size_t	j;
+	size_t	k;
 }				t_env;
 
 char	**g_pwd;

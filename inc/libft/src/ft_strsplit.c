@@ -12,62 +12,76 @@
 
 #include "libft.h"
 
-static int			ft_count(char const *s, char c)
+static size_t	count_w(char const *s, char c)
 {
-	int				i;
-	int				len;
-
-	i = 0;
-	len = 0;
-	while (s[i])
-	{
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
-			len++;
-		i++;
-	}
-	return (len);
-}
-
-static char			**ft_sublen(char const *s, char c, char **tab, int nbl)
-{
-	int				i;
-	int				j;
-	size_t			start;
-	size_t			len;
+	size_t		i;
+	size_t		j;
 
 	i = 0;
 	j = 0;
 	while (s[i])
 	{
-		if (s[i] != c && nbl > 0)
+		while (s[i] == c)
+			i++;
+		if (s[i] != c && s[i])
 		{
-			nbl--;
-			start = i;
-			len = 0;
-			while (s[i] != c && s[i] != '\0')
-			{
-				len++;
+			j++;
+			i++;
+			while (s[i] != c && s[i])
 				i++;
-			}
-			tab[j++] = ft_strsub(s, start, len);
 		}
-		i++;
 	}
-	tab[j] = NULL;
-	return (tab);
+	return (j);
 }
 
-char				**ft_strsplit(const char *s, char c)
+static char		*add_w(size_t *i, char const *s, char c)
 {
-	int				nbl;
-	char			**tab;
+	size_t		size;
+	size_t		j;
+	char		*word;
 
-	nbl = 0;
-	if (!s)
-		return (NULL);
-	nbl = ft_count(s, c);
-	if (!(tab = (char **)ft_memalloc(sizeof(char *) * (nbl + 1))))
-		return (NULL);
-	tab = ft_sublen(s, c, tab, nbl);
-	return (tab);
+	size = *i;
+	j = 0;
+	while (s[size] && s[size] != c)
+		size++;
+	word = ft_strnew(size - *i);
+	if (word)
+	{
+		while (*i < size)
+		{
+			word[j] = s[*i];
+			j++;
+			*i += 1;
+		}
+		return (word);
+	}
+	return (0);
+}
+
+char			**ft_strsplit(char const *s, char c)
+{
+	char		**tab;
+	size_t		o;
+	size_t		*i;
+	size_t		j;
+
+	o = 0;
+	i = &o;
+	j = 0;
+	tab = NULL;
+	if (s)
+		tab = (char **) malloc(sizeof(char *) * (count_w(s, c) + 1));
+	if (tab)
+	{
+		while (j < count_w(s, c))
+		{
+			while (s[*i] == c)
+				*i += 1;
+			if (s[*i] != c && s[*i])
+				tab[j++] = add_w(i, s, c);
+		}
+		tab[j] = 0;
+		return (tab);
+	}
+	return (0);
 }
