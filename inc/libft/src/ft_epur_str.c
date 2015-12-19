@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_epur_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cglavieu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cglavieu <cglavieu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/16 00:40:03 by cglavieu          #+#    #+#             */
-/*   Updated: 2015/11/16 00:40:06 by cglavieu         ###   ########.fr       */
+/*   Updated: 2015/12/19 16:27:17 by cglavieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ char		*ft_epur_str(const char *src)
 
 	a = 0;
 	count = -1;
-	ret = (char *)ft_memalloc(sizeof(char) * (ft_strlen(src) - things(src) + 1));
+	ret = (char *)ft_memalloc(sizeof(char) *
+		(ft_strlen(src) - things(src) + 1));
 	while (*(src + ++count + a) != '\0')
 	{
 		while (*(src + count + a) == ' ' || *(src + count + a) == '\t')

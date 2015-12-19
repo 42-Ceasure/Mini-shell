@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cglavieu <cglavieu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/10 06:35:42 by cglavieu          #+#    #+#             */
+/*   Updated: 2015/12/18 11:51:20 by cglavieu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "shell.h"
 
@@ -31,7 +42,7 @@ void		ft_cd(t_env *e)
 		if (*g_home)
 			change_dir(e, *g_home);
 		else
-			ft_putendl("no home directory");	
+			ft_putendl("no home directory");
 	}
 	else
 		change_dir(e, e->av[1]);

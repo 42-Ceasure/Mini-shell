@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setenv.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cglavieu <cglavieu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/10 06:35:42 by cglavieu          #+#    #+#             */
+/*   Updated: 2015/12/18 12:26:09 by cglavieu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "shell.h"
 
@@ -100,6 +111,8 @@ void		ft_setenv(t_env *e)
 	if (e->av[1])
 	{
 		check(e, tmp, var, val);
+		// free(var);
+		// free(val);
 	}
 	else
 		ft_putendl("use setenv <var>=<val>\nor setenv <var> <val>");

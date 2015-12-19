@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memreg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cglavieu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cglavieu <cglavieu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 02:45:28 by cglavieu          #+#    #+#             */
-/*   Updated: 2015/11/30 02:45:29 by cglavieu         ###   ########.fr       */
+/*   Updated: 2015/12/19 16:27:42 by cglavieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void memreg(char **s)
+void	memreg(char **s)
 {
 	int i;
 

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tildminus.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cglavieu <cglavieu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/10 06:35:42 by cglavieu          #+#    #+#             */
+/*   Updated: 2015/12/18 11:56:10 by cglavieu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "shell.h"
 
@@ -22,12 +33,12 @@ void			minus(t_env *e, size_t z, size_t i)
 		{
 			tmp = ft_strsub(e->av[z], 1, (ft_strlen(e->av[z]) - 1));
 			lol = ft_strjoin(*g_oldpwd, tmp);
-			free(e->av[z]);	
+			free(e->av[z]);
 			e->av[z] = ft_strdup(lol);
 			free(tmp);
 			free(lol);
 		}
-	}	
+	}
 }
 
 void			tilde(t_env *e, size_t z, size_t i)

@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   select_do.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cglavieu <cglavieu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/10 06:35:42 by cglavieu          #+#    #+#             */
+/*   Updated: 2015/12/18 11:55:30 by cglavieu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "shell.h"
 
-void chk_n_ex_cmd(t_env *e)
+void		chk_n_ex_cmd(t_env *e)
 {
-	int i;
-	pid_t father;
-	DIR *dir;
+	int		i;
+	pid_t	father;
+	DIR		*dir;
 
 	i = 0;
 	father = fork();
@@ -37,12 +48,12 @@ void chk_n_ex_cmd(t_env *e)
 			ft_putstr("c-sh : \'");
 			ft_putstr(e->av[0]);
 			ft_putendl("\' : command not found");
-			exit(0);	
+			exit(0);
 		}
 	}
 }
 
-void inspection(t_env *e)
+void		inspection(t_env *e)
 {
 	if (!ft_strcmp(e->av[0], "exit"))
 		exit(0);
